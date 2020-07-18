@@ -1,5 +1,5 @@
 # chess
-Trialing collaborative work on GitHub by developing a chess game 
+Trialing collaborative work on GitHub by developing a chess game in Python. 
 
 Authors:
 Hayden Isaac, Sam James
