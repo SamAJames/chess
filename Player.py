@@ -4,20 +4,37 @@ class Player:
 		self.Name = input("Enter your name: ")
 		self.player = player
 
-	def getMove(self):
-		
+	def setMove(self):
 		while True:
-			move = input("Enter your move: ")
+			move = input("Enter your move: ")		
 			try:
 				initPos, endPos = move.split(', ')
-				print(initPos, endPos)
-				break;
+				if self.validateMove(initPos) and self.validateMove(endPos):
+					self.initPos = initPos
+					self.endPos = endPos
+					break;
+				else:
+					print("Invalid Move. Please enter a new move.")				
 			except:
 				print("Please enter your move in the format: A1, A2")
-		print("Works")
+	
+	def getMove(self):
+		return (self.initPos, self.endPos)
+		
+	def validateMove(self, position):
+		try:
+			alpha, number = list(position)
+			alpha = ord(alpha.upper())
+			number = int(number)
+			if (alpha < 72 and alpha > 64) and (number > 0 and number < 9):
+				return True		
+		except:
+			print("Invalid move.")
+		return False
+		 
 
-		
-		
-		print("Initialising Player 1")		
+	
+print("Initialising Player 1")		
 p1 = Player("White")
-p1.getMove()
+p1.setMove()
+print(p1.getMove())
