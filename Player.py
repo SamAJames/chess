@@ -24,8 +24,11 @@ class Player:
 	def validateMove(self, position):
 		try:
 			alpha, number = list(position)
+			
 			alpha = ord(alpha.upper())
 			number = int(number)
+			
+			## Check if letter is in A-G. Check if number is between 1,8.
 			if (alpha < 72 and alpha > 64) and (number > 0 and number < 9):
 				return True		
 		except:
@@ -33,8 +36,11 @@ class Player:
 		return False
 		 
 
+'''
+Test script
 	
 print("Initialising Player 1")		
 p1 = Player("White")
 p1.setMove()
 print(p1.getMove())
+'''
