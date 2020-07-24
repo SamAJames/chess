@@ -29,7 +29,7 @@ class Player:
 			number = int(number)
 			
 			## Check if letter is in A-G. Check if number is between 1,8.
-			if (alpha < 72 and alpha > 64) and (number > 0 and number < 9):
+			if (alpha < 73 and alpha > 64) and (number > 0 and number < 9):
 				return True		
 		except:
 			print("Invalid move.")
@@ -37,7 +37,7 @@ class Player:
 		 
 
 '''
-Test script
+## Test script
 	
 print("Initialising Player 1")		
 p1 = Player("White")
