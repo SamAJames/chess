@@ -67,7 +67,7 @@ class Board:
                 if(piece == 0):
                     board = board + '0'
                 else:
-                    board = board + piece.colour + piece.symbol
+                    board = board + piece.symbol
         return board
         
     def setBoardState(self, newBoard):

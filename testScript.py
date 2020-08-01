@@ -8,27 +8,27 @@ def testBoard(generated, target, name):
 
 def runTests(BoardClass):
     board = BoardClass()
-    testBoard(board.getBoardShort(), "wRwNwBwQwKwBwNwRwPwPwPwPwPwPwPwP00000000000000000000000000000000bPbPbPbPbPbPbPbPbRbNbBbQbKbBbNbR", "Test 1 - basic board setup")
+    testBoard(board.getBoardShort(), "RNBQKBNRPPPPPPPP00000000000000000000000000000000pppppppprnbqkbnr", "Test 1 - basic board setup")
     
     board.movePiece('w', 'A2', 'A3')
-    testBoard(board.getBoardShort(), "wRwNwBwQwKwBwNwR0wPwPwPwPwPwPwPwP0000000000000000000000000000000bPbPbPbPbPbPbPbPbRbNbBbQbKbBbNbR", "Test 2 - move pawn one space")
+    testBoard(board.getBoardShort(), "RNBQKBNR0PPPPPPPP0000000000000000000000000000000pppppppprnbqkbnr", "Test 2 - move pawn one space")
     
     board.movePiece('w', 'E2', 'E4')
-    testBoard(board.getBoardShort(), "wRwNwBwQwKwBwNwR0wPwPwP0wPwPwPwP00000000000wP0000000000000000000bPbPbPbPbPbPbPbPbRbNbBbQbKbBbNbR", "Test 3 - move pawn two spaces")
+    testBoard(board.getBoardShort(), "RNBQKBNR0PPP0PPPP00000000000P0000000000000000000pppppppprnbqkbnr", "Test 3 - move pawn two spaces")
     
     board.movePiece('w', 'B1', 'C3')
-    testBoard(board.getBoardShort(), "wR0wBwQwKwBwNwR0wPwPwP0wPwPwPwP0wN000000000wP0000000000000000000bPbPbPbPbPbPbPbPbRbNbBbQbKbBbNbR", "Test 4 - knight jumps over piece")
+    testBoard(board.getBoardShort(), "R0BQKBNR0PPP0PPPP0N000000000P0000000000000000000pppppppprnbqkbnr", "Test 4 - knight jumps over piece")
     
     board.movePiece('w', 'D1', 'F3')
-    testBoard(board.getBoardShort(), "wR0wB0wKwBwNwR0wPwPwP0wPwPwPwP0wN00wQ000000wP0000000000000000000bPbPbPbPbPbPbPbPbRbNbBbQbKbBbNbR", "Test 5 - move queen diagonally")
+    testBoard(board.getBoardShort(), "R0B0KBNR0PPP0PPPP0N00Q000000P0000000000000000000pppppppprnbqkbnr", "Test 5 - move queen diagonally")
     
     board.movePiece('w', 'H1', 'H5')
-    testBoard(board.getBoardShort(), "wR0wB0wKwBwNwR0wPwPwP0wPwPwPwP0wN00wQ000000wP0000000000000000000bPbPbPbPbPbPbPbPbRbNbBbQbKbBbNbR", "Test 6 - rook can't move through pieces")
+    testBoard(board.getBoardShort(), "R0B0KBNR0PPP0PPPP0N00Q000000P0000000000000000000pppppppprnbqkbnr", "Test 6 - rook can't move through pieces")
     
     board.movePiece('b', 'D7', 'D5')
-    testBoard(board.getBoardShort(), "wR0wB0wKwBwNwR0wPwPwP0wPwPwPwP0wN00wQ000000wP000000bP000000000000bPbPbP0bPbPbPbPbRbNbBbQbKbBbNbR", "Test 7 - move black pawn")
+    testBoard(board.getBoardShort(), "R0B0KBNR0PPP0PPPP0N00Q000000P000000p000000000000ppp0pppprnbqkbnr", "Test 7 - move black pawn")
     
     board.movePiece('w', 'E4', 'D5')
-    testBoard(board.getBoardShort(), "wR0wB0wKwBwNwR0wPwPwP0wPwPwPwP0wN00wQ0000000000000wP000000000000bPbPbP0bPbPbPbPbRbNbBbQbKbBbNbR", "Test 8 - pawn diagonal take")
+    testBoard(board.getBoardShort(), "R0B0KBNR0PPP0PPPP0N00Q0000000000000P000000000000ppp0pppprnbqkbnr", "Test 8 - pawn takes diagonally")
     
     
