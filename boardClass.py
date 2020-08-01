@@ -115,7 +115,7 @@ class Board:
                         return 0
                     return 1
             
-            # Checks if the move is a valis additional rule for specific pieces (pawn double forawrd or king castle)
+            # Checks if the move is a valid additional rule for specific pieces (pawn double forawrd or king castle)
             if piece.specialMove:
                 if move in piece.specialMoves and self.board[self.column(endSquare)][self.row(endSquare)] == 0:
                     piece.pieceMoved()
@@ -132,17 +132,26 @@ class Board:
         return 1
         
     def printBoard(self):
+        print('  ', end = '')
+        for i in range(65,73):
+           print('  %c ' %i,  end = '')
+        print('\n  ', end = '')
+        print('+---'*8, end= '+\n')
         for row in range(len(self.board[0])-1, -1, -1):
+            print(row+1, end =' ')
             for column in range(len(self.board)):
+                print('¦', end = ' ')
                 symbol = str(self.board[column][row]) if isinstance(self.board[column][row], int) else self.board[column][row].symbol
                 print(symbol, end = ' ')
+            print('¦\n  +', end = '') 
+            for column in range(len(self.board)):
+                print('---+', end = '')
             print()
         print()
     
     '''
     def checkCheck(self):
-        
-        
+
     def checkWin(self):
         
         
@@ -152,11 +161,12 @@ class Board:
     '''
         
     
-'''  
+''' 
 game1 = Board()
 game1.printBoard()
 print(game1.movePiece('w', 'A2', 'A3'))
 game1.printBoard()
+
 print(game1.movePiece('w', 'E2', 'E4'))
 game1.printBoard()
 print(game1.movePiece('w', 'D1', 'F3'))
