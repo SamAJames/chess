@@ -70,11 +70,17 @@ class Pawn(Piece):
     def __init__(self, colour):
         super().__init__(colour)
         self.symbol = super().symbol("P", colour)
-        self.moves = [[0, 1]]
+        
+        if colour == 'w':
+            direction = 1
+        elif colour == 'b':
+            direction = -1
+            
+        self.moves = [[0, direction]]
         self.normalTake = False
-        self.takes = [[-1, 1], [1, 1]]
+        self.takes = [[-1, direction], [1, direction]]
         self.specialMove = True
-        self.specialMoves = [[0, 2]]
+        self.specialMoves = [[0, 2*direction]]
     
     def pieceMoved(self):
         self.specialMove = False

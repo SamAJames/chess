@@ -1,5 +1,6 @@
 #boardClass.py
 from pieceClass import*
+from testScript import*
 
 import numpy as np
 
@@ -57,6 +58,17 @@ class Board:
                         
     def getBoardState(self):
         return self.board
+        
+    def getBoardShort(self):
+        board = ''
+        for column in range(len(self.board)):
+            for row in range(len(self.board[0])):
+                piece = self.board[row][column]
+                if(piece == 0):
+                    board = board + '0'
+                else:
+                    board = board + piece.symbol
+        return board
         
     def setBoardState(self, newBoard):
         self.board = newBoard
@@ -170,3 +182,5 @@ game1.printBoard()
 print(game1.movePiece('w', 'E6', 'F7'))
 game1.printBoard()
 '''
+
+runTests(Board)
