@@ -31,4 +31,3 @@ def runTests(BoardClass):
     board.movePiece('w', 'E4', 'D5')
     testBoard(board.getBoardShort(), "R0B0KBNR0PPP0PPPP0N00Q0000000000000P000000000000ppp0pppprnbqkbnr", "Test 8 - pawn takes diagonally")
     
-    

@@ -161,7 +161,7 @@ class Board:
     '''
         
     
-''' 
+'''
 game1 = Board()
 game1.printBoard()
 print(game1.movePiece('w', 'A2', 'A3'))
@@ -182,5 +182,4 @@ game1.printBoard()
 print(game1.movePiece('w', 'E6', 'F7'))
 game1.printBoard()
 '''
-
-runTests(Board)
+# runTests(Board)
