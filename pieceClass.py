@@ -6,8 +6,9 @@ class Piece:
         self.jump = False
         self.normalTake = True
         self.specialMove = False
-        
-    def symbol(self, piece, colour):
+
+    @staticmethod
+    def symbol(piece, colour):
         if colour == 'b':
             piece = piece.lower()
         return piece

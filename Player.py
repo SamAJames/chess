@@ -12,7 +12,7 @@ class Player:
 				if self.validateMove(initPos) and self.validateMove(endPos):
 					self.initPos = initPos
 					self.endPos = endPos
-					break;
+					break
 				else:
 					print("Invalid Move. Please enter a new move.")				
 			except:
@@ -29,18 +29,8 @@ class Player:
 			number = int(number)
 			
 			## Check if letter is in A-G. Check if number is between 1,8.
-			if (alpha < 73 and alpha > 64) and (number > 0 and number < 9):
+			if (73 > alpha > 64) and (0 < number < 9):
 				return True		
 		except:
 			print("Invalid move.")
 		return False
-		 
-
-'''
-## Test script
-	
-print("Initialising Player 1")		
-p1 = Player("White")
-p1.setMove()
-print(p1.getMove())
-'''
