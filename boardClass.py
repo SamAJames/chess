@@ -51,7 +51,7 @@ class Board:
 
     def column(self, square):
         columns = {"A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H": 7}
-        return columns[square[0]]
+        return columns[square[0].upper()]
         
     def row(self, square):
         return int(square[1])-1 
@@ -115,7 +115,7 @@ class Board:
                         return 0
                     return 1
             
-            # Checks if the move is a valid additional rule for specific pieces (pawn double forawrd or king castle)
+            # Checks if the move is a valid additional rule for specific pieces (pawn double forward or king castle)
             if piece.specialMove:
                 if move in piece.specialMoves and self.board[self.column(endSquare)][self.row(endSquare)] == 0:
                     piece.pieceMoved()
@@ -134,11 +134,11 @@ class Board:
     def printBoard(self):
         print('  ', end = '')
         for i in range(65,73):
-           print('  %c ' %i,  end = '')
-        print('\n  ', end = '')
-        print('+---'*8, end= '+\n')
+           print('  %c ' % i,  end='')
+        print('\n  ', end='')
+        print('+---'*8, end='+\n')
         for row in range(len(self.board[0])-1, -1, -1):
-            print(row+1, end =' ')
+            print(row+1, end=' ')
             for column in range(len(self.board)):
                 print('¦', end = ' ')
                 symbol = str(self.board[column][row]) if isinstance(self.board[column][row], int) else self.board[column][row].symbol
@@ -148,10 +148,58 @@ class Board:
                 print('---+', end = '')
             print()
         print()
-    
-    '''
-    def checkCheck(self):
 
+    def checkCheck(self):
+        # Locate king
+        # Look for adjacent pieces
+        # Also check specifically for knights
+        # If opponents pieces can take the king then check
+        letter = {0:"A",1:"B",2:"C",3:"D",4:"E",5:"F",6:"G",7:"H"}
+        for row in range(8):
+            for col in range(8):
+                if isinstance(self.board[col][row], King):
+                    player = self.board[col][row].colour
+                    print(row, col)
+                    kingPos = letter[col] + str(row+1)
+                    diags = [self.diagonal, self.offDiagonal]
+                    directions = [1, -1]
+                    # Check diagonals
+                    for dir in directions:
+                        for diag in diags:
+                            rowCheck, colCheck, piece = self.checkDiagonal(row, col, dir, diag)
+                            piecePos = letter[colCheck] + str(rowCheck+1)
+                            try:
+                                if piece.colour != player:
+                                    print(self.checkValidMove(player, piecePos, kingPos))
+
+                            except AttributeError:
+                                # Occurs when nothing is returned. i.e. there is no piece in the position
+                                pass
+
+    def checkDiagonal(self, row, col, direction, diagonal):
+        colCheck = col
+        rowCheck = row
+        while True:
+            rowCheck, colCheck = diagonal(rowCheck, colCheck, direction)
+            if not (0 <= rowCheck < 8 and 0 <= colCheck < 8):
+                return 0,0,0
+            if not isinstance(self.board[colCheck][rowCheck], int):
+                piece = self.board[colCheck][rowCheck]
+                return rowCheck, colCheck, piece
+
+
+    def diagonal(self, row, col, direction):
+        row += direction
+        col += direction
+        return row, col
+
+    def offDiagonal(self, row, col, direction):
+        row += direction
+        col -= direction
+        return row, col
+
+
+    '''
     def checkWin(self):
         
         

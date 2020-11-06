@@ -29,9 +29,9 @@ def main():
         board.printBoard()
 
         # Check for Check
+        board.checkCheck()
 
         # Change turn
-
         turn += 1
         currentPlayer = players[changePlayer(turn)]
 

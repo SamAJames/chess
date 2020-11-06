@@ -66,7 +66,8 @@ class King(Piece):
     
     def pieceMoved(self):
         self.specialMove = False
-                      
+
+
 class Pawn(Piece):
     def __init__(self, colour):
         super().__init__(colour)
