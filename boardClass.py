@@ -159,10 +159,11 @@ class Board:
             for col in range(8):
                 if isinstance(self.board[col][row], King):
                     player = self.board[col][row].colour
-                    print(row, col)
+                    check = False
                     kingPos = letter[col] + str(row+1)
                     diags = [self.diagonal, self.offDiagonal]
                     directions = [1, -1]
+                    orthogonals = ["col", "row"]
                     # Check diagonals
                     for dir in directions:
                         for diag in diags:
@@ -170,23 +171,57 @@ class Board:
                             piecePos = letter[colCheck] + str(rowCheck+1)
                             try:
                                 if piece.colour != player:
-                                    print(self.checkValidMove(player, piecePos, kingPos))
+                                    check += self.checkValidMove(player, piecePos, kingPos)
 
                             except AttributeError:
                                 # Occurs when nothing is returned. i.e. there is no piece in the position
                                 pass
 
-    def checkDiagonal(self, row, col, direction, diagonal):
-        colCheck = col
-        rowCheck = row
-        while True:
-            rowCheck, colCheck = diagonal(rowCheck, colCheck, direction)
-            if not (0 <= rowCheck < 8 and 0 <= colCheck < 8):
-                return 0,0,0
-            if not isinstance(self.board[colCheck][rowCheck], int):
-                piece = self.board[colCheck][rowCheck]
-                return rowCheck, colCheck, piece
+                        for axis in orthogonals:
+                            rowCheck, colCheck, piece = self.checkOrthogonal(row, col, dir, axis)
+                            piecePos = letter[colCheck] + str(rowCheck+1)
+                            try:
+                                if piece.colour != player:
+                                    check += self.checkValidMove(player, piecePos, kingPos)
 
+                            except AttributeError:
+                                # Occurs when nothing is returned.
+                                pass
+
+                    if check:
+                        if player == "b":
+                            print("Lowercase", end="")
+                        elif player == "w":
+                            print("Caps", end="")
+                        else:
+                            pass
+
+                        print(" king is in check.")
+
+
+    def checkDiagonal(self, row, col, direction, diagonal):
+        while True:
+            row, col = diagonal(row, col, direction)
+            if not (0 <= row < 8 and 0 <= col < 8):
+                return 0, 0, 0
+            if not isinstance(self.board[col][row], int):
+                piece = self.board[col][row]
+                return row, col, piece
+
+    def checkOrthogonal(self, row, col, direction, constant):
+        while True:
+            if constant == "col":
+                col += direction
+            elif constant == "row":
+                row += direction
+            else:
+                print("Should not happen")
+
+            if not (0 <= row < 8 and 0 <= col < 8):
+                return 0, 0, 0
+            if not isinstance(self.board[col][row], int):
+                piece = self.board[col][row]
+                return row, col, piece
 
     def diagonal(self, row, col, direction):
         row += direction
