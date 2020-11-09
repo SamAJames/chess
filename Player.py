@@ -1,7 +1,7 @@
 class Player:
 	
 	def __init__(self, player):
-		self.Name = input("Enter your name: ")
+		self.name = input("Enter your name: ")
 		self.player = player
 
 	def setMove(self):
