@@ -23,17 +23,31 @@ def main():
 
     while not gameOver:
         # Take move
-        currentPlayer.setMove()
-        move = currentPlayer.getMove()
-        board.movePiece(currentPlayer.player, move[0], move[1])
-        board.printBoard()
+        if currentPlayer.player == "b":
+            print(currentPlayer.name +"'s Turn")
+        elif currentPlayer.player == "w":
+            print(currentPlayer.name + "'s Turn")
 
-        # Check for Check
-        board.checkCheck()
+        while True:
+            currentPlayer.setMove()
+            move = currentPlayer.getMove()
+            words, legalMove = (board.movePiece(currentPlayer.player, move[0], move[1]))
+            if legalMove:
+                break
+            else:
+                print(words)
+
+        board.printBoard()
+        print(words)
+        print("Previous Move: ", move)
+
+
 
         # Change turn
         turn += 1
         currentPlayer = players[changePlayer(turn)]
+
+
 
 
 if __name__ == "__main__":
