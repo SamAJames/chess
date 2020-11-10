@@ -193,6 +193,7 @@ class Board:
                     diags = [self.diagonal, self.offDiagonal]
                     directions = [1, -1]
                     orthogonals = ["col", "row"]
+                    offsets = [[2, 1], [2, -1], [-2, 1], [-2, -1], [1, 2], [1, -2], [-1, 2], [-1, -2]]
                     # Check diagonals
                     for dir in directions:
                         for diag in diags:
@@ -216,6 +217,18 @@ class Board:
                             except AttributeError:
                                 # Occurs when nothing is returned.
                                 pass
+
+                    for offset in offsets:
+                        rowCheck, colCheck, piece = self.checkKnights(board, col, row, offset)
+                        piecePos = letter[colCheck] + str(rowCheck + 1)
+                        try:
+                            if piece.colour != player:
+                                print(piece)
+                                check += self.checkValidMove(board, piecePos, kingPos)
+
+                        except AttributeError:
+                            # Occurs when nothing is returned. i.e. there is no piece in the position
+                            pass
 
                     checks.append([player, check])
         return checks
@@ -243,6 +256,23 @@ class Board:
             if not isinstance(board[col][row], int):
                 piece = board[col][row]
                 return row, col, piece
+
+    def checkKnights(self, board, col, row, offset):
+        col += offset[1]
+        row += offset[0]
+        print(row, col)
+
+        if not (0 <= col < 8 and 0 <= row < 8):
+            return 0, 0, 0
+
+        if not isinstance(board[col][row], int):
+            piece = board[col][row]
+            return row, col, piece
+        else:
+            return 0, 0, 0
+
+
+
 
     def diagonal(self, row, col, direction):
         row += direction
