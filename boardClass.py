@@ -223,7 +223,6 @@ class Board:
                         piecePos = letter[colCheck] + str(rowCheck + 1)
                         try:
                             if piece.colour != player:
-                                print(piece)
                                 check += self.checkValidMove(board, piecePos, kingPos)
 
                         except AttributeError:
@@ -260,7 +259,6 @@ class Board:
     def checkKnights(self, board, col, row, offset):
         col += offset[1]
         row += offset[0]
-        print(row, col)
 
         if not (0 <= col < 8 and 0 <= row < 8):
             return 0, 0, 0
